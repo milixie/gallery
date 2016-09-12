@@ -15,7 +15,7 @@ $(document).ready(function(){
 	outOfOrder();
 
 	function outOfOrder(){
-		
+
 		var contentIndex = parseInt(Math.random() * ($iFigure.length - 1));
 		for (var i = 0; i < $iFigure.length; i++) {
 
@@ -34,6 +34,10 @@ $(document).ready(function(){
 				var randomTop = getRandom(-$iFigureH, $containerH);
 				var randomDeg = getRandom(-45,45);
 
+				if ( randomLeft > ($wWindow - 3 * $iFigureW) / 2 &&　randomLeft < ($wWindow + $iFigureW) / 2 ){
+					randomTop = parseInt(Math.random() + 0.5) ? getRandom(-$iFigureH, ($containerH - 3 * $iFigureH) / 2) : getRandom(($containerH + $iFigureH) / 2 , $containerH);
+				}
+
 				$iFigure.eq(i).css({
 					'left': randomLeft,
 					'top': randomTop,
@@ -50,6 +54,12 @@ $(document).ready(function(){
 	}
 
 	$('#switch-icon li').click(function(){
+		if ($(this).hasClass('active')) {
+			return ;
+		}
+
+		console.log(222);
+
 		$(this).addClass('active').siblings('li').removeClass('active');
 
 		outOfOrder();
