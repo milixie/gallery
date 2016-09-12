@@ -79,6 +79,7 @@ ul {
 	position: absolute;
 	left: 40%;
 	bottom: 20px;
+	z-index: 100;
 }
 
 ul li{

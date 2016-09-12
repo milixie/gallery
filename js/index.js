@@ -16,18 +16,34 @@ $(document).ready(function(){
 
 	function outOfOrder(){
 		
+		var contentIndex = parseInt(Math.random() * ($iFigure.length - 1));
 		for (var i = 0; i < $iFigure.length; i++) {
 
-			var randomLeft = getRandom(-$iFigureW, $wWindow);
-			var randomTop = getRandom(-$iFigureH, $containerH);
-			var randomDeg = getRandom(-45,45);
+			if (i == contentIndex){
+				var contentLeft = ($wWindow - $iFigureW)/2;
+				var contentTop = ($containerH - $iFigureH)/2;
+				$iFigure.eq(i).css({
+					'left': contentLeft,
+					'top': contentTop,
+					zIndex: 2,
+					WebkitTransform: 'rotate(' + 0 + 'deg)',
+					'-moz-transform': 'rotate(' + 0 + 'deg)'
+				});
+			} else {
+				var randomLeft = getRandom(-$iFigureW, $wWindow);
+				var randomTop = getRandom(-$iFigureH, $containerH);
+				var randomDeg = getRandom(-45,45);
 
-			$iFigure.eq(i).css({
-				'left': randomLeft,
-				'top': randomTop,
-				WebkitTransform: 'rotate(' + randomDeg + 'deg)',
-				'-moz-transform': 'rotate(' + randomDeg + 'deg)'
-			});
+				$iFigure.eq(i).css({
+					'left': randomLeft,
+					'top': randomTop,
+					zIndex: 1,
+					WebkitTransform: 'rotate(' + randomDeg + 'deg)',
+					'-moz-transform': 'rotate(' + randomDeg + 'deg)'
+				});
+				
+			}
+
 
 		}
 
