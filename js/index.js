@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
 	var iFigure = $('figure'),  // get images figure array
-			wWindow = $("body").width(),  // wiondow width
+			wWindow,
 		  containerH = $('.container').outerHeight(), // container height
 			iFigureW = $('figure').eq(0).outerWidth(),  // 每个卡片的宽度
 			iFigureH = $('figure').eq(0).outerHeight(),  // 每个卡片的高度
@@ -14,6 +14,7 @@ $(document).ready(function(){
 
 	// 初始化整个乱序图片
 	for (var x = 0; x < iFigure.length; x ++ ) {
+		var wWindow = $("body").width();  // wiondow width
 		outOfOrder(x, true);
 	}
 
@@ -45,7 +46,7 @@ $(document).ready(function(){
 
 	// 画廊有一张是在中心位置，其他都是乱序排列--排序函数
 	function inOrder(){
-
+		wWindow = $("body").width();  // wiondow width
 		var contentIndex = parseInt(Math.random() * (iFigure.length - 1));
 		for (var i = 0; i < iFigure.length; i++) {
 
@@ -59,8 +60,10 @@ $(document).ready(function(){
 					WebkitTransform: 'rotate(' + 0 + 'deg)',
 					'-moz-transform': 'rotate(' + 0 + 'deg)'
 				});
+				iFigure.eq(i).children('a').css('cursor', 'pointer').attr({'href': 'http://www.17sucai.com/' , 'target': '_blank'});
 			} else {
 				outOfOrder(i, false);
+				iFigure.eq(i).children('a').css('cursor', 'default' ).attr({'href': '#' , 'target': '_self'});
 			}
 		}
 
@@ -71,6 +74,10 @@ $(document).ready(function(){
 			return ;
 		}
 		$(this).addClass('active').siblings('li').removeClass('active');
+		inOrder();
+	});
+
+	$(window).resize(function(){
 		inOrder();
 	});
 
