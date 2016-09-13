@@ -3,10 +3,10 @@ function ViewGallery(){
 	var _self = this;
 	_self.iFigure = $('figure');
 	_self.windowWidth = $(window).width();
-	_self.containerH = $('.container').outerHeight(), // container height
+	_self.wrapH = $('.wrap').outerHeight(), // wrap height
 	_self.figureWidth = _self.iFigure.eq(0).outerWidth(),  // 每个卡片的宽度
 	_self.figureHeight = _self.iFigure.eq(0).outerHeight(),  // 每个卡片的高度
- 	_self.viewMask = $('.container-mask');  //get mask btn
+ 	_self.viewMask = $('.wrap-mask');  //get mask btn
 
  	_self.getRandom = function (minNum,maxNum){
 		return parseInt(Math.random() * (maxNum - minNum) + minNum);
@@ -14,12 +14,12 @@ function ViewGallery(){
 
  	_self.setOutOrder = function(obj, index, isFirst) {
  		var randomLeft = _self.getRandom(-_self.figureWidth, _self.windowWidth);
- 		var randomTop = _self.getRandom(-_self.figureHeight, _self.containerH);
+ 		var randomTop = _self.getRandom(-_self.figureHeight, _self.wrapH);
  		var randomDeg = _self.getRandom(-45,45);
 
  		if (!isFirst){  // 如果不是第一次进入页面，则图片画廊有一张在中心位置
  			if ( randomLeft > (_self.windowWidth - 3 * _self.figureWidth) / 2 &&　randomLeft < (_self.windowWidth + _self.figureWidth) / 2 ){
- 				randomTop = parseInt(Math.random() + 0.5) ? _self.getRandom(-_self.figureHeight, (_self.containerH - 3 * _self.figureHeight) / 2) : _self.getRandom((_self.containerH + _self.figureHeight) / 2 , _self.containerH);
+ 				randomTop = parseInt(Math.random() + 0.5) ? _self.getRandom(-_self.figureHeight, (_self.wrapH - 3 * _self.figureHeight) / 2) : _self.getRandom((_self.wrapH + _self.figureHeight) / 2 , _self.wrapH);
  			}
  		}
 
@@ -38,7 +38,7 @@ function ViewGallery(){
 
 			if (i == contentIndex){
 				var contentLeft = (_self.windowWidth - _self.figureWidth)/2;
-				var contentTop = (_self.containerH - _self.figureHeight)/2;
+				var contentTop = (_self.wrapH - _self.figureHeight)/2;
 				obj.eq(i).css({
 					'left': contentLeft,
 					'top': contentTop,
@@ -62,12 +62,6 @@ $(document).ready(function(){
 	for (var x = 0; x < model.iFigure.length; x ++ ) {
 		model.setOutOrder(model.iFigure, x ,true);
 	}
-
-	// 点击蒙层表层开始展示散列画廊
-	model.viewMask.click(function(){
-		model.setInOrder(model.iFigure);
-		$(".container-mask").css('zIndex', -1);  // 蒙层消失
-	});
 
 	$(window).resize(function(){
 		model.windowWidth = $("body").width();  // 重新获取window的宽度
