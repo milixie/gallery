@@ -1,84 +1,77 @@
-$(document).ready(function(){
 
-	var iFigure = $('figure'),  // get images figure array
-			wWindow,
-		  containerH = $('.container').outerHeight(), // container height
-			iFigureW = $('figure').eq(0).outerWidth(),  // 每个卡片的宽度
-			iFigureH = $('figure').eq(0).outerHeight(),  // 每个卡片的高度
-		 	viewMask = $('.container-mask');  //get mask btn
+function ViewGallery(){
+	var _self = this;
+	_self.iFigure = $('figure');
+	_self.windowWidth = $(window).width();
+	_self.containerH = $('.container').outerHeight(), // container height
+	_self.figureWidth = _self.iFigure.eq(0).outerWidth(),  // 每个卡片的宽度
+	_self.figureHeight = _self.iFigure.eq(0).outerHeight(),  // 每个卡片的高度
+ 	_self.viewMask = $('.container-mask');  //get mask btn
 
-	// get random number between minNum and maxNum
-	function getRandom(minNum,maxNum){
+ 	_self.getRandom = function (minNum,maxNum){
 		return parseInt(Math.random() * (maxNum - minNum) + minNum);
 	}
 
-	// 初始化整个乱序图片
-	for (var x = 0; x < iFigure.length; x ++ ) {
-		var wWindow = $("body").width();  // wiondow width
-		outOfOrder(x, true);
-	}
+ 	_self.setOutOrder = function(obj, index, isFirst) {
+ 		var randomLeft = _self.getRandom(-_self.figureWidth, _self.windowWidth);
+ 		var randomTop = _self.getRandom(-_self.figureHeight, _self.containerH);
+ 		var randomDeg = _self.getRandom(-45,45);
 
-	// 点击蒙层表层开始展示散列画廊
-	viewMask.click(function(){
-		inOrder();
-		$(".container-mask").css('zIndex', -1);  // 蒙层消失
-	});
+ 		if (!isFirst){  // 如果不是第一次进入页面，则图片画廊有一张在中心位置
+ 			if ( randomLeft > (_self.windowWidth - 3 * _self.figureWidth) / 2 &&　randomLeft < (_self.windowWidth + _self.figureWidth) / 2 ){
+ 				randomTop = parseInt(Math.random() + 0.5) ? _self.getRandom(-_self.figureHeight, (_self.containerH - 3 * _self.figureHeight) / 2) : _self.getRandom((_self.containerH + _self.figureHeight) / 2 , _self.containerH);
+ 			}
+ 		}
 
-	function outOfOrder(index, isFirst) {
-		var randomLeft = getRandom(-iFigureW, wWindow);
-		var randomTop = getRandom(-iFigureH, containerH);
-		var randomDeg = getRandom(-45,45);
+ 		obj.eq(index).css({
+ 			'left': randomLeft,
+ 			'top': randomTop,
+ 			zIndex: 1,
+ 			WebkitTransform: 'rotate(' + randomDeg + 'deg)',
+ 			'-moz-transform': 'rotate(' + randomDeg + 'deg)'
+ 		});
+ 	}
 
-		if (!isFirst){  // 如果不是第一次进入页面，则图片画廊有一张在中心位置
-			if ( randomLeft > (wWindow - 3 * iFigureW) / 2 &&　randomLeft < (wWindow + iFigureW) / 2 ){
-				randomTop = parseInt(Math.random() + 0.5) ? getRandom(-iFigureH, (containerH - 3 * iFigureH) / 2) : getRandom((containerH + iFigureH) / 2 , containerH);
-			}
-		}
-
-		iFigure.eq(index).css({
-			'left': randomLeft,
-			'top': randomTop,
-			zIndex: 1,
-			WebkitTransform: 'rotate(' + randomDeg + 'deg)',
-			'-moz-transform': 'rotate(' + randomDeg + 'deg)'
-		});
-	}
-
-	// 画廊有一张是在中心位置，其他都是乱序排列--排序函数
-	function inOrder(){
-		wWindow = $("body").width();  // wiondow width
-		var contentIndex = parseInt(Math.random() * (iFigure.length - 1));
-		for (var i = 0; i < iFigure.length; i++) {
+	_self.setInOrder = function(obj){
+		var contentIndex = parseInt(Math.random() * (obj.length - 1));
+		for (var i = 0; i < obj.length; i++) {
 
 			if (i == contentIndex){
-				var contentLeft = (wWindow - iFigureW)/2;
-				var contentTop = (containerH - iFigureH)/2;
-				iFigure.eq(i).css({
+				var contentLeft = (_self.windowWidth - _self.figureWidth)/2;
+				var contentTop = (_self.containerH - _self.figureHeight)/2;
+				obj.eq(i).css({
 					'left': contentLeft,
 					'top': contentTop,
 					zIndex: 2,
 					WebkitTransform: 'rotate(' + 0 + 'deg)',
 					'-moz-transform': 'rotate(' + 0 + 'deg)'
 				});
-				iFigure.eq(i).children('a').css('cursor', 'pointer').attr({'href': 'http://www.17sucai.com/' , 'target': '_blank'});
+				obj.eq(i).children('a').css('cursor', 'pointer').attr({'href': 'http://www.17sucai.com/' , 'target': '_blank'});
 			} else {
-				outOfOrder(i, false);
-				iFigure.eq(i).children('a').css('cursor', 'default' ).attr({'href': '#' , 'target': '_self'});
+				_self.setOutOrder(obj, i, false);
+				obj.eq(i).children('a').css('cursor', 'default' ).attr({'href': '#' , 'target': '_self'});
 			}
 		}
+	}
+}
 
+var model = new ViewGallery();
+
+$(document).ready(function(){
+	// 初始化整个乱序图片
+	for (var x = 0; x < model.iFigure.length; x ++ ) {
+		model.setOutOrder(model.iFigure, x ,true);
 	}
 
-	$('#switch-icon li').click(function(){
-		if ($(this).hasClass('active')) {
-			return ;
-		}
-		$(this).addClass('active').siblings('li').removeClass('active');
-		inOrder();
+	// 点击蒙层表层开始展示散列画廊
+	model.viewMask.click(function(){
+		model.setInOrder(model.iFigure);
+		$(".container-mask").css('zIndex', -1);  // 蒙层消失
 	});
 
 	$(window).resize(function(){
-		inOrder();
+		model.windowWidth = $("body").width();  // 重新获取window的宽度
+		model.setInOrder(model.iFigure);
 	});
 
 });
