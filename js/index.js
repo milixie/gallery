@@ -52,6 +52,7 @@ function ViewGallery(){
 				obj.eq(i).children('a').css('cursor', 'default' ).attr({'href': '#' , 'target': '_self'});
 			}
 		}
+		return contentIndex;
 	}
 }
 

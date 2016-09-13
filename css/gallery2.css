@@ -1,4 +1,41 @@
+.figure-back{
+	display: none;
+	width: 240px;
+	font-family: "Give You Glory", cursive;
+	font-size: 22px;
+	color: #a7a0a2;
+	position: absolute;
+	top: 40px;
+	left: 40px;
+}
+
+figure.current-figure{
+	transform: rotateY(180deg);
+	transform-origin: center;
+}
+
+figure.current-figure img,figure.current-figure h2{
+	display: none;
+}
+
+figure.current-figure .figure-back{
+	display: block;
+}
+
 ul li.active{
 	transform: scale(1.8);
 	-webkit-transform: scale(1.8);
+}
+
+ul li.active.translate-btn{
+}
+
+ul li i.glyphicon{
+	top: 2px;
+	left: 2px;
+	color: #fff;
+	opacity: 0;
+}
+ul li.translate-btn.active i.glyphicon{
+	opacity: 1;
 }
