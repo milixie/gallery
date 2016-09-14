@@ -1,6 +1,7 @@
 $(function(){
 
-	var results;
+	var results,
+		  flag = true;
 	// 点击蒙层表层开始展示散列画廊
 	model.viewMask.click(function(){
 		results = model.setInOrder(model.iFigure);
@@ -14,12 +15,47 @@ $(function(){
 
 		if (that.hasClass('active')) {
 			if (that.hasClass('translate-btn')){
-				console.log(results);
+				if (flag){
+					setTimeout(function(){
+						model.iFigure.eq(results).addClass('current-figure');
+					},100);
+					model.iFigure.eq(results).css({
+						WebkitTransform: 'rotateY(' + 180 + 'deg)',
+						'-moz-transform': 'rotateY(' + 180 + 'deg)'
+					});
+					that.css({
+						WebkitTransform: 'rotateY(' + 180 + 'deg) scale(' + 1.8 + ')',
+						'-moz-transform': 'rotateY(' + 180 + 'deg) scale(' + 1.8 + ')'
+					});
+					flag = !flag;
+				} else{
+					setTimeout(function(){
+						model.iFigure.eq(results).removeClass('current-figure');
+					},100);
+					model.iFigure.eq(results).css({
+						WebkitTransform: 'rotateY(' + 0 + 'deg)',
+						'-moz-transform': 'rotateY(' + 0 + 'deg)'
+					});
+					that.css({
+						WebkitTransform: 'rotateY(' + 0 + 'deg) scale(' + 1.8 + ')',
+						'-moz-transform': 'rotateY(' + 0 + 'deg) scale(' + 1.8 + ')'
+					});
+					flag = !flag;
+				}
 			}
 			return ;
+		} else {
+			that.addClass('active').siblings('li').removeClass('active');
+			that.css({
+				WebkitTransform: 'scale(' + 1.8 + ')',
+				'-moz-transform': 'scale(' + 1.8 + ')'
+			});
+			that.siblings('li').css({
+				WebkitTransform: 'scale(' + 1 + ')',
+				'-moz-transform': 'scale(' + 1 + ')'
+			});
 		}
 
-		that.addClass('active').siblings('li').removeClass('active');
 
 		if (curIndex == 2 || curIndex == 5){
 			for(var n = 0; n < model.iFigure.length; n ++){

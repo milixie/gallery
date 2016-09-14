@@ -7,11 +7,13 @@
 	position: absolute;
 	top: 40px;
 	left: 40px;
+	transform: rotateY(180deg);
+	transition: all 1s;
 }
 
 figure.current-figure{
-	transform: rotateY(180deg);
 	transform-origin: center;
+	transition: all 1s;
 }
 
 figure.current-figure img,figure.current-figure h2{
@@ -22,12 +24,15 @@ figure.current-figure .figure-back{
 	display: block;
 }
 
+ul li.translate-btn.active{
+	transform: scale(1.8);
+	-webkit-transform: scale(1.8);
+	transition: all 1s;
+}
 ul li.active{
 	transform: scale(1.8);
 	-webkit-transform: scale(1.8);
-}
-
-ul li.active.translate-btn{
+	transition: all 1s;
 }
 
 ul li i.glyphicon{
