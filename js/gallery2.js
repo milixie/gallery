@@ -9,6 +9,17 @@ $(function(){
 		$('#switch-icon').css('zIndex', 3);
 	});
 
+	function runAnimate(obj, objLi, centerIndex, rotateDeg, scaleNumber){
+		obj.eq(centerIndex).css({
+			WebkitTransform: 'rotateY(' + rotateDeg + 'deg)',
+			'-moz-transform': 'rotateY(' + rotateDeg + 'deg)'
+		});
+		objLi.css({
+			WebkitTransform: 'rotateY(' + rotateDeg + 'deg) scale(' + scaleNumber + ')',
+			'-moz-transform': 'rotateY(' + rotateDeg + 'deg) scale(' + scaleNumber + ')'
+		});
+	}
+
 	$('#switch-icon li').click(function(){
 		var that = $(this);
 		var curIndex = that.index();
@@ -19,27 +30,13 @@ $(function(){
 					setTimeout(function(){
 						model.iFigure.eq(results).addClass('current-figure');
 					},100);
-					model.iFigure.eq(results).css({
-						WebkitTransform: 'rotateY(' + 180 + 'deg)',
-						'-moz-transform': 'rotateY(' + 180 + 'deg)'
-					});
-					that.css({
-						WebkitTransform: 'rotateY(' + 180 + 'deg) scale(' + 1.8 + ')',
-						'-moz-transform': 'rotateY(' + 180 + 'deg) scale(' + 1.8 + ')'
-					});
+					runAnimate(model.iFigure, that, results, 180, 1.8);
 					flag = !flag;
 				} else{
 					setTimeout(function(){
 						model.iFigure.eq(results).removeClass('current-figure');
 					},100);
-					model.iFigure.eq(results).css({
-						WebkitTransform: 'rotateY(' + 0 + 'deg)',
-						'-moz-transform': 'rotateY(' + 0 + 'deg)'
-					});
-					that.css({
-						WebkitTransform: 'rotateY(' + 0 + 'deg) scale(' + 1.8 + ')',
-						'-moz-transform': 'rotateY(' + 0 + 'deg) scale(' + 1.8 + ')'
-					});
+					runAnimate(model.iFigure, that, results, 0, 1.8);
 					flag = !flag;
 				}
 			}
@@ -79,17 +76,6 @@ $(function(){
 		}else{
 			results = model.setInOrder(model.iFigure);
 		}
-
-
-		// setTimeout(function(){
-		// 	if (that.hasClass('active')) {
-		// 		if (that.hasClass('translate-btn')){
-		// 			console.log(results);
-		// 			model.iFigure.eq(results).addClass('current-figure');
-		// 		}
-		// 		return ;
-		// 	}
-		// },1800);
 
 	});
 });
