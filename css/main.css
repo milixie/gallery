@@ -23,6 +23,7 @@ body{
   font-size: 12px;
   font-family: micorsofe yahei, tohoma, arial, \5b8b\4f53, sans-serif;
   line-height: 1.428;
+  -webkit-font-smoothing: antialiased;   /*使得字体更加平滑*/
 }
 
 .clearfix{
@@ -58,6 +59,7 @@ h1{
 	background: #ddd;
 	height: 600px;
 	overflow: hidden;
+	/*-webkit-perspective: 800px;*/
 }
 
 .wrap-mask{
