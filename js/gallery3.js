@@ -120,7 +120,7 @@ $(function(){
 
 	var iPhotoW = $('.photo').width(),
 			iPhotoH = $('.photo').height(),
-			randomX = getRandom(1,16),
+			randomX = getRandom(0,15),
 			arr = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15];
 			
 	// 4 乱序函数
@@ -199,6 +199,7 @@ $(function(){
 
 	$(window).resize(function(){
 		wrapW = $('.wrap').outerWidth();
-		outOrder(getRandom(0,15));
+		randomX = getRandom(0,15);
+		outOrder(randomX);
 	});
 });
