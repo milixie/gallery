@@ -1,5 +1,17 @@
+h1{
+	text-align: center;
+	margin-top: 60px;
+	font-size: 40px;
+}
+
 .wrap{
-	-webkit-perspective: 1000;
+	position: relative;
+	width: 100%;
+	margin: 40px auto 0;
+	background: #bbb;
+	height: 700px;
+	overflow: hidden;
+	-webkit-perspective: 800px;
 }
 
 .photo{
@@ -7,6 +19,7 @@
 	width: 320px;
 	height: 360px;
 	transition: all 1s;
+	-webkit-transition: all 1s;
 	cursor: pointer;
 	transform-style: preserve-3d;
 	-webkit-transform-style: preserve-3d;
@@ -16,7 +29,8 @@
 	left: 50% !important;
 	margin-left: -160px;
 	top: 120px !important;
-	transform: rotate(0deg) !important;
+	transform: scale(1.2) rotate(0deg) !important;
+	-webkit-transform: scale(1.2) rotate(0deg) !important;
 	z-index: 2;
 }
 
@@ -27,7 +41,6 @@
 	background: #fff;
 	transform-style: preserve-3d;
 	-webkit-transform-style: preserve-3d;
-	transition: all 1s;
 }
 
 .photo-wrap h2{
@@ -62,11 +75,15 @@
 .photo-front .photo-wrap{
 	transform: rotateY(0deg);
 	-webkit-transform: rotateY(0deg);
+	transition: all 1s;
+	-webkit-transition: all 1s;
 }
 
 .photo-back .photo-wrap{
 	transform: rotateY(180deg);
 	-webkit-transform: rotateY(180deg);
+	transition: all 1s;
+	-webkit-transition: all 1s;
 }
 
 #switch {
@@ -81,11 +98,12 @@
 	width: 15px;
 	height: 15px;
 	border-radius: 50%;
-	background: #999;
+	background: #777;
 	margin: 10px;
 }
 #switch li.current-li{
 	transform: scale(1.8);
+	-webkit-transform: scale(1.8);
 	position: relative;
 	top: -10px;
 	-webkit-font-smoothing: antialiased;
@@ -93,17 +111,17 @@
 }
 #switch li.current-li.turn-front{
 	transform: rotateY(0deg) scale(1.8);
-	transition: all 1s;
+	-webkit-transform: rotateY(0deg) scale(1.8);
 }
 #switch li.current-li.turn-back{
 	transform: rotateY(180deg) scale(1.8);
-	transition: all 1s;
-	background: #666;
+	-webkit-transform: rotateY(180deg) scale(1.8);
+	background: #333;
 }
 
 @font-face{
-     font-family:  'icons';
-     src: url('../bower_components/bootstrap/fonts/glyphicons-halflings-regular.woff') format('woff');
+  font-family:  'icons';
+  src: url('../bower_components/bootstrap/fonts/glyphicons-halflings-regular.woff') format('woff');
 }
 #switch li.current-li i{
 	color: #fff;

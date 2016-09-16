@@ -139,13 +139,15 @@ $(function(){
 					$('.photo').eq(sortArr[m]).css({
 						'left': getRandom(- iPhotoW / 2,(wrapW - 3 * iPhotoW)/2),
 						'top': getRandom(- iPhotoH / 2,wrapH - iPhotoH / 2),
-						WebkitTransform: 'rotate('+ randomDeg +'deg)'
+						WebkitTransform: 'rotate('+ randomDeg +'deg)',
+						'-moz-transform': 'rotate('+ randomDeg +'deg)'
 					});
 				} else {
 					$('.photo').eq(sortArr[m]).css({
 						'left': getRandom((wrapW + iPhotoW) / 2, wrapW - iPhotoW / 2),
 						'top': getRandom(- iPhotoH / 2,wrapH - iPhotoH / 2),
-						WebkitTransform: 'rotate('+ randomDeg +'deg)'
+						WebkitTransform: 'rotate('+ randomDeg +'deg)',
+						'-moz-transform': 'rotate('+ randomDeg +'deg)'
 					});
 				}
 			}

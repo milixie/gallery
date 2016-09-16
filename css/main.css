@@ -48,16 +48,16 @@ body{
 
 h1{
 	text-align: center;
-	margin-top: 100px;
+	margin-top: 60px;
 	font-size: 40px;
 }
 
 .wrap{
 	position: relative;
 	width: 100%;
-	margin: 60px auto 0;
-	background: #ddd;
-	height: 600px;
+	margin: 40px auto 0;
+	background: #bbb;
+	height: 800px;
 	overflow: hidden;
 	/*-webkit-perspective: 800px;*/
 }
