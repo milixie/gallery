@@ -87,7 +87,7 @@ $(function(){
 	var wrapH = $('.wrap').outerHeight();
 
 	// 2.遍历data数据，将数据填充到HTML中
-	var str = '';
+	var str = '', ulStr = '';
 	for(i in data) {
 		str += '<div class="photo photo-front" id="photo_' + data[i].index + '">' + 
 				'<div class="photo-wrap">' + 
@@ -100,8 +100,17 @@ $(function(){
 				'</div>' + 
 			'</div>' +
 		'</div>';
+		ulStr += '<li id="li_' + data[i].index + '" class="turn-front"><i></i></li>';
 	}
-	$('.wrap').html(str);
+	var wrapHtml = (str + '<ul id="switch">' + ulStr + '</ul>');
+	$('.wrap').html(wrapHtml);
+
+	// 6 定位ul的位置
+	var ulSwitch = $('#switch');
+	ulWidth = ulSwitch.width();
+	ulSwitch.css({
+		'marginLeft': -ulWidth / 2 
+	})
 
 	// 3让其中任意一个置于中间位置，并且分成左右两栏
 	function getRandom(min, max) {
@@ -114,7 +123,7 @@ $(function(){
 			randomX = getRandom(1,16),
 			arr = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15];
 			
-	// 乱序函数
+	// 4 乱序函数
 	function outOrder(centerEle){
 		var sortArr = unSort();
 		for(var m = 0; m < data.length; m++){
@@ -122,8 +131,10 @@ $(function(){
 
 			if (sortArr[m] == centerEle){
 				$('.photo').eq(centerEle).addClass('photo-center');
+				$('#switch li').eq(centerEle).addClass('current-li');
 			} else {
 				$('.photo').eq(sortArr[m]).removeClass('photo-center');
+				$('#switch li').eq(sortArr[m]).removeClass('current-li');
 				if (m < data.length / 2){
 					$('.photo').eq(sortArr[m]).css({
 						'left': getRandom(- iPhotoW / 2,(wrapW - 3 * iPhotoW)/2),
@@ -166,6 +177,18 @@ $(function(){
 	$('.photo').click(function(){
 		if ($(this).index() == randomX) {
 			turnPan($(this), 'photo-front', 'photo-back');
+			turnPan($('#switch li').eq(randomX), 'turn-front', 'turn-back');
+		} else {
+			randomX = $(this).index();
+			outOrder($(this).index());
+		}
+	});
+
+	// 5 控制按钮
+	$('#switch li').click(function(){
+		if ($(this).index() == randomX){
+			turnPan($('.photo').eq(randomX), 'photo-front', 'photo-back');
+			turnPan($(this), 'turn-front', 'turn-back');
 		} else {
 			randomX = $(this).index();
 			outOrder($(this).index());

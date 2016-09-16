@@ -68,3 +68,47 @@
 	transform: rotateY(180deg);
 	-webkit-transform: rotateY(180deg);
 }
+
+#switch {
+	position: absolute;
+	bottom: 30px;
+	left: 50%;
+	z-index: 100;
+}
+
+#switch li {
+	display: inline-block;
+	width: 15px;
+	height: 15px;
+	border-radius: 50%;
+	background: #999;
+	margin: 10px;
+}
+#switch li.current-li{
+	transform: scale(1.8);
+	position: relative;
+	top: -10px;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+#switch li.current-li.turn-front{
+	transform: rotateY(0deg) scale(1.8);
+	transition: all 1s;
+}
+#switch li.current-li.turn-back{
+	transform: rotateY(180deg) scale(1.8);
+	transition: all 1s;
+	background: #666;
+}
+
+@font-face{
+     font-family:  'icons';
+     src: url('../bower_components/bootstrap/fonts/glyphicons-halflings-regular.woff') format('woff');
+}
+#switch li.current-li i{
+	color: #fff;
+}
+#switch li.current-li i:after{
+	content: "\e095";
+	font-family: 'icons';
+}
