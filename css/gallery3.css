@@ -41,6 +41,7 @@ h1{
 	background: #fff;
 	transform-style: preserve-3d;
 	-webkit-transform-style: preserve-3d;
+	-webkit-transform-origin: 0 50%;
 }
 
 .photo-wrap h2{
@@ -76,15 +77,15 @@ h1{
 }
 
 .photo-front .photo-wrap{
-	transform: rotateY(0deg);
-	-webkit-transform: rotateY(0deg);
+	transform: translate(0px, 0px) rotateY(0deg);
+	-webkit-transform: translate(0px, 0px) rotateY(0deg);
 	transition: all 1s;
 	-webkit-transition: all 1s;
 }
 
 .photo-back .photo-wrap{
-	transform: rotateY(180deg);
-	-webkit-transform: rotateY(180deg);
+	transform: translate(320px, 0px) rotateY(180deg);
+	-webkit-transform: translate(320px, 0px) rotateY(180deg);
 	transition: all 1s;
 	-webkit-transition: all 1s;
 }
