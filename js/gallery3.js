@@ -111,26 +111,27 @@ $(function(){
 
 	var iPhotoW = $('.photo').width(),
 			iPhotoH = $('.photo').height(),
-			randomX = getRandom(1,16);
+			randomX = getRandom(1,16),
+			arr = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15];
 			
-
 	// 乱序函数
 	function outOrder(centerEle){
+		var sortArr = unSort();
 		for(var m = 0; m < data.length; m++){
 			var randomDeg = getRandom(-45, 45);
 
-			if (m == centerEle){
+			if (sortArr[m] == centerEle){
 				$('.photo').eq(centerEle).addClass('photo-center');
 			} else {
-				$('.photo').eq(m).removeClass('photo-center');
+				$('.photo').eq(sortArr[m]).removeClass('photo-center');
 				if (m < data.length / 2){
-					$('.photo').eq(m).css({
+					$('.photo').eq(sortArr[m]).css({
 						'left': getRandom(- iPhotoW / 2,(wrapW - 3 * iPhotoW)/2),
 						'top': getRandom(- iPhotoH / 2,wrapH - iPhotoH / 2),
 						WebkitTransform: 'rotate('+ randomDeg +'deg)'
 					});
 				} else {
-					$('.photo').eq(m).css({
+					$('.photo').eq(sortArr[m]).css({
 						'left': getRandom((wrapW + iPhotoW) / 2, wrapW - iPhotoW / 2),
 						'top': getRandom(- iPhotoH / 2,wrapH - iPhotoH / 2),
 						WebkitTransform: 'rotate('+ randomDeg +'deg)'
@@ -138,6 +139,17 @@ $(function(){
 				}
 			}
 		}
+	}
+
+	function unSort(){
+		var len = arr.length;
+		for(var i = 0; i < len; i ++){
+			var r = parseInt(Math.random() * len);
+			var temp = arr[r];
+			arr[r] = arr[i];
+			arr[i] = temp;
+		}
+		return arr;
 	}
 
 	outOrder(randomX);
