@@ -124,14 +124,14 @@ $(function(){
 			arr = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15];
 			
 	// 4 乱序函数
-	function outOrder(centerEle){
+	function outOrder(centerEleIndex){
 		var sortArr = unSort();
 		for(var m = 0; m < data.length; m++){
 			var randomDeg = getRandom(-45, 45);
 
-			if (sortArr[m] == centerEle){
-				$('.photo').eq(centerEle).addClass('photo-center');
-				$('#switch li').eq(centerEle).addClass('current-li');
+			if (sortArr[m] == centerEleIndex){
+				$('.photo').eq(centerEleIndex).addClass('photo-center');
+				$('#switch li').eq(centerEleIndex).addClass('current-li');
 			} else {
 				$('.photo').eq(sortArr[m]).removeClass('photo-center');
 				$('#switch li').eq(sortArr[m]).removeClass('current-li');
@@ -195,5 +195,10 @@ $(function(){
 			randomX = $(this).index();
 			outOrder($(this).index());
 		}
+	});
+
+	$(window).resize(function(){
+		wrapW = $('.wrap').outerWidth();
+		outOrder(getRandom(0,15));
 	});
 });
