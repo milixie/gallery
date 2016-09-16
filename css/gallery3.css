@@ -1,0 +1,70 @@
+.wrap{
+	-webkit-perspective: 1000;
+}
+
+.photo{
+	position: absolute;
+	width: 320px;
+	height: 360px;
+	transition: all 1s;
+	cursor: pointer;
+	transform-style: preserve-3d;
+	-webkit-transform-style: preserve-3d;
+}
+
+.photo-center{
+	left: 50% !important;
+	margin-left: -160px;
+	top: 120px !important;
+	transform: rotate(0deg) !important;
+	z-index: 2;
+}
+
+.photo-wrap{
+	width: 100%;
+	height: 100%;
+	padding: 40px;
+	background: #fff;
+	transform-style: preserve-3d;
+	-webkit-transform-style: preserve-3d;
+	transition: all 1s;
+}
+
+.photo-wrap h2{
+	text-align: center;
+}
+
+.side {
+	width: 240px;
+	position: absolute;
+	top: 40px;
+	left: 40px;
+	backface-visibility: hidden;
+	-webkit-backface-visibility: hidden;
+}
+
+.side p{
+	font-family: "Give You Glory", cursive;
+	font-size: 22px;
+	color: #a7a0a2;
+}
+
+.side-front {
+	transform: rotateY(0deg);
+	-webkit-transform: rotateY(0deg);
+}
+
+.side-back {
+	transform: rotateY(180deg);
+	-webkit-transform: rotateY(180deg);
+}
+
+.photo-front .photo-wrap{
+	transform: rotateY(0deg);
+	-webkit-transform: rotateY(0deg);
+}
+
+.photo-back .photo-wrap{
+	transform: rotateY(180deg);
+	-webkit-transform: rotateY(180deg);
+}
