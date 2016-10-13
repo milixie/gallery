@@ -57,14 +57,14 @@ h1{
 	width: 100%;
 	margin: 40px auto 0;
 	background: #bbb;
-	height: 800px;
+	height: 700px;
 	overflow: hidden;
 	/*-webkit-perspective: 800px;*/
 }
 
 .wrap-mask{
 	width: 100%;
-	height: 600px;
+	height: 700px;
 	position: absolute;
 	left: 0;
 	top: 0;

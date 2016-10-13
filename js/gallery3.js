@@ -92,7 +92,7 @@ $(function(){
 		str += '<div class="photo photo-front" id="photo_' + data[i].index + '">' + 
 				'<div class="photo-wrap">' + 
 					'<div class="side side-front">' +
-						'<img src="img/'+ data[i].img + '">' + 
+						'<img src="http://7xj5et.com1.z0.glb.clouddn.com/gallery/img/'+ data[i].img + '">' + 
 						'<h2>' + data[i].header + '</h2>' + 
 					'</div>' + 
 				'<div class="side side-back">' + 
